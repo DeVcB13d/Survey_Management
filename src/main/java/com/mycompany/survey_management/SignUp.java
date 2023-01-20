@@ -215,9 +215,11 @@ public class SignUp extends javax.swing.JFrame {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/survey","root","12345678");
             Statement stm = con.createStatement();
            
-            String sql = "INSERT INTO login_details VALUES('"+name+"','"+email+"','"+password+"')";
+            String sql = "INSERT INTO login_details VALUES('"+email+"','"+name+"','"+password+"')";
             stm.executeUpdate(sql);
             JOptionPane.showMessageDialog(this,"Values saved successfully");
+            jToggleButton1ActionPerformed(evt);
+            jToggleButton3ActionPerformed(evt);
         }
         catch(Exception e){
             System.out.println(e);

@@ -188,7 +188,7 @@ public class login_page extends javax.swing.JFrame {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/survey","root","12345678");
             Class.forName("com.mysql.jdbc.Driver");
-            pst = con.prepareStatement("select password from login_details where emailD = '" + email_l + "' ");
+            pst = con.prepareStatement("select password from login_details where email_id = '" + email_l + "' ");
             ResultSet rs1 = pst.executeQuery();
             if(rs1.next()==false){
                 JOptionPane.showMessageDialog(this,"User not found Signup or enter correct emailID");
@@ -197,7 +197,7 @@ public class login_page extends javax.swing.JFrame {
                 String check = rs1.getString("password");
                 if (check.equals(password_l)){
                     JOptionPane.showMessageDialog(this,"Login Successful\nRedirecting to details page");
-                    SurveyDetails SD = new SurveyDetails();
+                    SurveyDetails SD = new SurveyDetails(email_l);
                     SD.setVisible(true);
                     this.setVisible(false);
                 }

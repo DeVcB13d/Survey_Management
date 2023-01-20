@@ -37,9 +37,9 @@ public class Admin_login extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        email_login = new javax.swing.JTextField();
+        A_UID = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        login_password = new javax.swing.JTextField();
+        A_password = new javax.swing.JTextField();
         loginButton = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -53,20 +53,20 @@ public class Admin_login extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel2.setText("Password");
 
-        email_login.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
-        email_login.addActionListener(new java.awt.event.ActionListener() {
+        A_UID.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
+        A_UID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                email_loginActionPerformed(evt);
+                A_UIDActionPerformed(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel3.setText("UID");
 
-        login_password.setFont(new java.awt.Font("Wingdings 3", 1, 14)); // NOI18N
-        login_password.addActionListener(new java.awt.event.ActionListener() {
+        A_password.setFont(new java.awt.Font("Wingdings 3", 1, 14)); // NOI18N
+        A_password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                login_passwordActionPerformed(evt);
+                A_passwordActionPerformed(evt);
             }
         });
 
@@ -89,11 +89,10 @@ public class Admin_login extends javax.swing.JFrame {
                         .addGap(199, 199, 199)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(email_login, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(A_UID, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(login_password, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(loginButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(A_password, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(152, 152, 152)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -107,11 +106,11 @@ public class Admin_login extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(email_login, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(A_UID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(login_password, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(A_password, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(loginButton)
                 .addContainerGap(89, Short.MAX_VALUE))
@@ -131,35 +130,35 @@ public class Admin_login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void email_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email_loginActionPerformed
+    private void A_UIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_A_UIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_email_loginActionPerformed
+    }//GEN-LAST:event_A_UIDActionPerformed
 
-    private void login_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_passwordActionPerformed
+    private void A_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_A_passwordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_login_passwordActionPerformed
+    }//GEN-LAST:event_A_passwordActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
         // To check database for entries and return to Details entry
-        String email_l = email_login.getText();
-        String password_l = login_password.getText();
+        String uid_l = A_UID.getText();
+        String password_l = A_password.getText();
         PreparedStatement pst;
         try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/survey","root","12345678");
             Class.forName("com.mysql.jdbc.Driver");
-            pst = con.prepareStatement("select password from login_details where emailD = '" + email_l + "' ");
+            pst = con.prepareStatement("select password from admin_login where UID = " + uid_l + " ");
             ResultSet rs1 = pst.executeQuery();
             if(rs1.next()==false){
-                JOptionPane.showMessageDialog(this,"User not found Signup or enter correct emailID");
+                JOptionPane.showMessageDialog(this,"Invalid Admin");
             }
             else{
                 String check = rs1.getString("password");
                 if (check.equals(password_l)){
-                    JOptionPane.showMessageDialog(this,"Login Successful\nRedirecting to details page");
-                    SurveyDetails SD = new SurveyDetails();
-                    SD.setVisible(true);
+                    JOptionPane.showMessageDialog(this,"Login Successful\nRedirecting");
+                    Admin_menu AM = new Admin_menu();
+                    AM.setVisible(true);
                     this.setVisible(false);
                 }
                 else{
@@ -210,12 +209,12 @@ public class Admin_login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField email_login;
+    private javax.swing.JTextField A_UID;
+    private javax.swing.JTextField A_password;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToggleButton loginButton;
-    private javax.swing.JTextField login_password;
     // End of variables declaration//GEN-END:variables
 }
